@@ -71,11 +71,10 @@ use geocodio_lib_rust::{request::address::AddressParams, response::BatchResult, 
 
 #[tokio::main]
 async fn main() {
-    let addresses = vec![
-        AddressParams::String("1500 Sugar Bowl Dr, New Orleans, LA 70112".to_string()),
-        AddressParams::String("1 MetLife Stadium Dr, East Rutherford, NJ 07073".to_string()),
-        AddressParams::String("1 AT&T Way, Arlington, TX 76011".to_string())
-    ];
+    let mut addresses = HashMap::new();
+    addresses.insert("SuperDome", AddressParams::String("1500 Sugar Bowl Dr, New Orleans, LA 70112".to_string()));
+    addresses.insert("MeadowLands", AddressParams::String("1 MetLife Stadium Dr, East Rutherford, NJ 07073".to_string()));
+    addresses.insert("AT&TStadium", AddressParams::String("1 AT&T Way, Arlington, TX 76011".to_string()));
 
     let geocodio = GeocodioProxy::new().unwrap();
     let response = geocodio

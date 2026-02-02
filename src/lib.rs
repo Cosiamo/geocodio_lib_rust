@@ -1,5 +1,7 @@
 #![doc = include_str!("../README.md")]
 
+use std::collections::HashMap;
+
 use errors::Error;
 use response::{GeocodeBatchResponse, GeocodeResponse, GeocodeReverseResponse};
 use request::{address::{AddressParams, Coordinates}, fetch::{batch_fetch, proxy_new}};
@@ -133,9 +135,9 @@ impl GeocodioProxy {
     ///    });
     ///}
     /// ```
-    pub async fn geocode_batch(&self, addresses: Vec<AddressParams>) -> Result<GeocodeBatchResponse, Error> {
+    pub async fn geocode_batch(&self, addresses: &HashMap<String, AddressParams>) -> Result<GeocodeBatchResponse, Error> {
         let mut params: Vec<String> = Vec::new();
-        addresses.iter().for_each(|address| {
+        addresses.iter().for_each(|(_, address)| {
             match address {
                 AddressParams::String(address) => params.push(address.to_string()),
                 AddressParams::AddressInput(address) => params.push(address.to_string()),

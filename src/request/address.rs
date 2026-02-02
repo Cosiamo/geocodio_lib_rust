@@ -8,12 +8,13 @@ pub struct Coordinates {
     pub longitude: f64,
 }
 
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum AddressParams {
     String(String),
     AddressInput(AddressInput),
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct AddressInput {
     pub line_1: Option<String>,
     pub line_2: Option<String>,
